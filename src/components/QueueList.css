@@ -1,0 +1,23 @@
+.container {
+    padding-left: 25%;
+    padding-right: 25%;
+    width: 50%;
+}
+
+/* .container .heading {
+    display: flex;
+} */
+
+.container .desktop-header {
+    flex-basis: 33%;
+    flex-shrink: 0%;
+}
+
+.container .mobile-header {
+    flex-basis: 33%;
+    flex-shrink: 0%;
+}
+
+.patient-info {
+    display: inline-block;
+}
