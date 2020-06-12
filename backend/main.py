@@ -13,7 +13,7 @@ DATA = {
         {'name': 'GP', 'patients':[
             {
                 'id': 5,
-                'priority': 'High',
+                'priority': 'Urgent',
                 'name': 'Bob',
                 'age': 1,
                 'telephone': 98383,
@@ -23,7 +23,7 @@ DATA = {
             },
             {
                 'id': 3,
-                'priority': 'Low',
+                'priority': 'Referred',
                 'name': 'Tony',
                 'age': 3,
                 'telephone': 567567,
@@ -37,8 +37,7 @@ DATA = {
     ]
 }
 
-def new_patient(self, priority, name, age, telephone, emergency, medicare, \
-    diseases):
+def new_patient(priority, name, age, telephone, emergency, medicare, diseases):
     return {
         'id': random.randint(1, 10000000),
         'priority': priority,
@@ -69,7 +68,7 @@ def patient_move(id, prev_queue, to_here_queue):
     for q in DATA['queues']:
         if q['name'] == prev_queue:
             for patient in q['patients']:
-                if patient[id] == id:
+                if patient['id'] == id:
                     tmp = patient
     patient_delete(id, prev_queue)
     for q in DATA['queues']:
@@ -80,14 +79,14 @@ def patient_delete(id, prev_queue):
     for q in DATA['queues']:
         if q['name'] == prev_queue:
             for patient in q['patients']:
-                if patient[id] == id:
+                if patient['id'] == id:
                     q['patients'].remove(patient)
 
 def patient_info(id, info):
     for q in DATA['queues']:
         for patient in q['patients']:
-            if patient[id] == id:
-                patient.info = info  
+            if patient['id'] == id:
+                patient['info'] = info
 
 def patient_status(id, status):
     for q in DATA['queues']:
