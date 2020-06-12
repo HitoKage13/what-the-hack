@@ -38,7 +38,7 @@ def patient_create(priority, name, age, telephone, emergency, medicare, diseases
     new_patient = Patient(priority, name, age, telephone, emergency, medicare, diseases)
     for q in DATA['queues']:
         if q['queue_name'] == 'GP':
-            q.append(new_patient)
+            q['queue_name'].append(new_patient)
 
 def patient_move(id, prev_queue, to_here_queue):
     for q in DATA['queues']:
@@ -56,7 +56,7 @@ def patient_delete(id, prev_queue):
         if q['queue_name'] == prev_queue:
             for patient in q['patients']:
                 if patient[id] == id:
-                    q.remove(patient)
+                    q['queue_name'].remove(patient)
 
 def patient_info(id, info):
     for q in DATA['queues']:
