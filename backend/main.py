@@ -19,8 +19,10 @@ def queue_create(name):
     Params:
     Raises:
     '''
-    queue = {'name': name, 'patients': []}
-    DATA['queues'].append(queue)
+    global DATA
+    DATA['queues'].append("bob")
+    # queue = {'name': name, 'patients': []}
+    # DATA['queues'].append(queue)
 
 def queue(name):
     for queue in DATA['queues']:
@@ -35,6 +37,6 @@ def patient_create(name):
             return queue
     raise Exception("Can't find queue")
 
-
-
+if __name__ == "__main__":
+    print(DATA)
 
