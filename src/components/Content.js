@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
+import QRCode from 'qrcode.react'
 import { Grid, AppBar, Toolbar, Button } from '@material-ui/core';
-import { NewButton, PatientInfo, QueueList } from '../components';
+import { NewButton, PatientInfo, Scanner, QueueList } from '../components';
 import Axios from 'axios';
 
 export default function Content() {
@@ -23,6 +24,7 @@ export default function Content() {
     ]
 
     const [permission, setPermission] = useState(null);
+    const [qr, setQr] = useState(null);
     const [currPatient, setCurrent] = useState(null);
     const [show, setShow] = useState('home');
     const [queue, setQ] = useState([]);
@@ -32,18 +34,22 @@ export default function Content() {
 
     useEffect(() => {
         fetch('/queue?name=GP').then(res => res.json()).then(data => {
-            console.log(data.patients);
             setG(data.patients);
         });
         fetch('/queue?name=Specialist').then(res => res.json()).then(data => {
-            console.log(data.patients);
             setSp(data.patients);
         });
         fetch('/queue?name=Surgeon').then(res => res.json()).then(data => {
-            console.log(data.patients);
             setSu(data.patients);
         });
     }, []);
+
+    /* function BEInfo() {
+        fetch('/patient/id='+qr).then(res => res.json()).then(data => {
+            console.log(data);
+            setCurrent(data);
+        });
+    } */
 
     // sets the current queue
     function setCurrentQueue(name) {
@@ -78,6 +84,11 @@ export default function Content() {
     function updateInfo() {
         // adds patient to next queue
     };
+
+    // uses scanner to set patient info
+    function getPatientInfo(qr) {
+        setQr(qr);
+    }
 
     // progress patient to the next queue
     function progressPatient(queue) {
@@ -130,6 +141,11 @@ export default function Content() {
             {show === 'queue' && currPatient === null && queue.length > 0 && <NewButton name="Next Person" onClick={() => {
                 nextPatient(queue[0]);
             }}></NewButton>}
+            {show === 'home' && <div style={{
+                display: 'flex',
+                justifyContent: 'center'
+            }}><Scanner result={getPatientInfo}></Scanner></div>}
+            <p>{qr}</p>
             {show === 'home' && <NewButton name="GP" onClick={() => {
                 changePermissions('GP');
             }}></NewButton>}
