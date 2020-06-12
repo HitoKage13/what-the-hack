@@ -27,9 +27,9 @@ class Patient:
         self.medicare = medicare
         self.diseases = diseases
 
-def queue(queue_name):
+def queue(name):
     for q in DATA['queues']:
-        if q['queue_name'] == queue_name:
+        if q['name'] == name:
             return q
     raise Exception("Can't find queue")
 
@@ -37,26 +37,26 @@ def patient_create(priority, name, age, telephone, emergency, medicare, diseases
     PATIENT_ID += 1
     new_patient = Patient(priority, name, age, telephone, emergency, medicare, diseases)
     for q in DATA['queues']:
-        if q['queue_name'] == 'GP':
-            q['queue_name'].append(new_patient)
+        if q['name'] == 'GP':
+            q['name'].append(new_patient)
 
 def patient_move(id, prev_queue, to_here_queue):
     for q in DATA['queues']:
-        if q['queue_name'] == prev_queue:
+        if q['name'] == prev_queue:
             for patient in q['patients']:
                 if patient[id] == id:
                     tmp = patient
     patient_delete(id, prev_queue)
     for q in DATA['queues']:
-        if q['queue_name'] == to_here_queue:
+        if q['name'] == to_here_queue:
                 q['patients'].append(tmp)
     
 def patient_delete(id, prev_queue):
     for q in DATA['queues']:
-        if q['queue_name'] == prev_queue:
+        if q['name'] == prev_queue:
             for patient in q['patients']:
                 if patient[id] == id:
-                    q['queue_name'].remove(patient)
+                    q['name'].remove(patient)
 
 def patient_info(id, info):
     for q in DATA['queues']:
