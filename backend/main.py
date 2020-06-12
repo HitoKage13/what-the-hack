@@ -2,8 +2,20 @@
 Description
 '''
 
-DATA = {'doctors': [], 'queues': []}
+DATA = {
+    'doctors': [
+        {'name': 'Jimmothy', 'type': 'GP'},
+        {'name': 'Tom', 'type': 'Specialist'},
+        {'name': 'Joanna', 'type': 'Surgeon'}}
+    ],
+    'queues': [
+        {'name': 'GP', 'patients':[]},
+        {'name': 'Specialist', 'patients':[]},
+        {'name': 'Surgeon', 'patients':[]}
+    ]
+}
 
+'''
 class Patient:
     def __init__(self, name, age, telephone, emergency, medicare, diseases):
         self.name = name
@@ -12,31 +24,29 @@ class Patient:
         self.emergency = name
         self.medicare = name
         self.diseases = name
+'''
 
-def queue_create(name):
-    '''
-    Description:
-    Params:
-    Raises:
-    '''
-    global DATA
-    DATA['queues'].append("bob")
-    # queue = {'name': name, 'patients': []}
-    # DATA['queues'].append(queue)
+# def return_data():
+#     return DATA
 
-def queue(name):
-    for queue in DATA['queues']:
-        if queue['name'] == name:
-            return queue
-    raise Exception("Can't find queue")
+# def return_destroy():
+#     DATA['pop'] = "lil"
+#     # DATA['queues'].append("hi")
+#     return {"hi":"hi"}
 
-def patient_create(name):
-    new_patient = Patient(name, age, )
-    for queue in DATA['queues']:
-        if queue['name'] == name:
-            return queue
-    raise Exception("Can't find queue")
+# def queue(name):
+#     for queue in DATA['queues']:
+#         if queue['name'] == name:
+#             return queue
+#     raise Exception("Can't find queue")
 
-if __name__ == "__main__":
-    print(DATA)
+# def patient_create(name):
+#     new_patient = Patient(name, age, )
+#     for queue in DATA['queues']:
+#         if queue['name'] == name:
+#             return queue
+#     raise Exception("Can't find queue")
+
+# if __name__ == "__main__":
+#     print(DATA)
 
