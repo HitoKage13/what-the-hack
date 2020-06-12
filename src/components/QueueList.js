@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid } from '@material-ui/core';
+import { Grid, Card } from '@material-ui/core';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -50,16 +50,15 @@ export default function QueueList(props) {
                         </Grid>
                     </ExpansionPanelSummary>
                     <ExpansionPanelDetails>
-                        <div>
+                        <Card className="info-card">
                             {Object.keys(person).map((key) => {
                                 return (
                                     <div>
-                                        <Typography className="patient-info"><b>{key}</b>: {person[key]}</Typography>
+                                        {key !== 'erStatus' && <Typography className="patient-info"><b>{key}</b>: {person[key]}</Typography>}
                                     </div>
                                 )
-                            })}
-                            
-                        </div>
+                            })}   
+                        </Card>
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
                 )})}

@@ -7,17 +7,17 @@ export default function Content() {
         {
             'name': 'Jeremy Lim', 'age': 20, 'telephone': '0478 893 328', 'emergency': '0482 162 538',
             'medicare': '1872 2727 1762 7348', 'status': 'waiting', 'doctor': 'Doctor McDoctorface',
-            'diseases': ['Cancer', 'Diabetes', 'AIDS'], 'notes': 'N/A'
+            'diseases': ['Cancer', 'Diabetes', 'AIDS'], 'notes': 'N/A', 'erStatus': 'Emergency'
         },
         {
             'name': 'Haesun Shim', 'age': 22, 'telephone': '0427 173 283', 'emergency': '0482 267 373',
             'medicare': '2734 1883 4327 2983', 'status': 'waiting', 'doctor': 'Doctor McDoctorface',
-            'diseases': ['Back Pain', 'Leprosy', 'AIDS'], 'notes': 'N/A'
+            'diseases': ['Back Pain', 'Leprosy', 'AIDS'], 'notes': 'N/A', 'erStatus': 'Urgent'
         },
         {
             'name': 'Sandeep Das', 'age': 20, 'telephone': '0418 389 374', 'emergency': '0472 374 127',
             'medicare': '1739 2784 5903 6830', 'status': 'specialist', 'doctor': 'Doctor McDoctorface',
-            'diseases': ['Ebola', 'COVID-19'], 'notes': 'N/A'
+            'diseases': ['Ebola', 'COVID-19'], 'notes': 'N/A', 'erStatus': 'Non-Urgent'
         }
     ]
 
@@ -39,8 +39,8 @@ export default function Content() {
 
     function progressPatient(name) {
         // adds patient to next queue
-        setCurrent(null);
         setShow('queue');
+        setCurrent(null);
     };
 
     function changePermissions(name) {

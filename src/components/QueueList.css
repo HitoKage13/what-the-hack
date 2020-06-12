@@ -1,22 +1,23 @@
 .container {
-    padding-left: 25%;
-    padding-right: 25%;
-    width: 50%;
+    padding-left: 15%;
+    padding-right: 15%;
+    width: 70%;
 }
 
 /* .container .heading {
     display: flex;
 } */
 
-.container .desktop-header {
-    flex-basis: 33%;
-    flex-shrink: 0%;
+.container .info-card {
+    min-width: 50%;
+    text-align: left;
+    padding-top: 2%;
+    padding-right: 5%;
+    padding-left: 5%;
+    padding-bottom: 2%;
 }
 
-.container .mobile-header {
-    flex-basis: 33%;
-    flex-shrink: 0%;
-}
+
 
 .patient-info {
     display: inline-block;

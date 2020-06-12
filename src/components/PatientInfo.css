@@ -1,0 +1,27 @@
+.container {
+    padding-left: 15%;
+    padding-right: 15%;
+    width: 70%;
+}
+
+.card {
+    min-height: 500px;
+}
+
+.container .card .info-card {
+    background-color: #c2c2c2;
+    text-align: left;
+    padding-top: 2%;
+    padding-left: 5%;
+    padding-bottom: 2%;
+}
+
+.grid {
+    display: flex;
+    justify-content: center;
+}
+
+.text {
+    margin: 5%;
+    padding: 2%;
+}
