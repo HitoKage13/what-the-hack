@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { Grid, AppBar, Toolbar, Button } from '@material-ui/core';
 import { NewButton, PatientInfo, QueueList } from '../components';
+import Axios from 'axios';
 
 export default function Content() {
     const patients = [
@@ -25,14 +26,22 @@ export default function Content() {
     const [currPatient, setCurrent] = useState(null);
     const [show, setShow] = useState('home');
     const [queue, setQ] = useState([]);
-    const [memes, setMeme] = useState(0);
-    let gpQueue = patients;
-    let spQueue = [];
-    let suQueue = [];
+    const [gpQueue, setG] = useState([]);
+    const [spQueue, setSp] = useState([]);
+    const [suQueue, setSu] = useState([]);
 
     useEffect(() => {
-        fetch('/q').then(res => res.json()).then(data => {
-            setMeme(data.hi);
+        fetch('/queue?name=GP').then(res => res.json()).then(data => {
+            console.log(data.patients);
+            setG(data.patients);
+        });
+        fetch('/queue?name=Specialist').then(res => res.json()).then(data => {
+            console.log(data.patients);
+            setSp(data.patients);
+        });
+        fetch('/queue?name=Surgeon').then(res => res.json()).then(data => {
+            console.log(data.patients);
+            setSu(data.patients);
         });
     }, []);
 
@@ -40,11 +49,11 @@ export default function Content() {
     function setCurrentQueue(name) {
         if (name === null) {
             setQ([]);
-        } else if (name === 'gp') {
+        } else if (name === 'GP') {
             setQ(gpQueue);
-        } else if (name === 'specialist') {
+        } else if (name === 'Specialist') {
             setQ(spQueue);
-        } else if (name === 'surgeon') {
+        } else if (name === 'Surgeon') {
             setQ(suQueue);
         }
     }
@@ -65,6 +74,7 @@ export default function Content() {
         setQ(newList);
     };
 
+    // updates their info
     function updateInfo() {
         // adds patient to next queue
     };
@@ -76,13 +86,19 @@ export default function Content() {
 
     // move patient to the next queue
     function movePatient(queue) {
-        if (queue === 'gp') {
-            gpQueue.push(currPatient);
-            
-        } else if (queue === 'specialist') {
-            spQueue.push(currPatient);
-        } else if (queue === 'surgeon') {
-            suQueue.push(currPatient);
+        var newList = []
+        if (queue === 'GP') {
+            newList = gpQueue;
+            newList.push(currPatient)
+            setG(newList)
+        } else if (queue === 'Specialist') {
+            newList = spQueue;
+            newList.push(currPatient)
+            setSp(newList)  
+        } else if (queue === 'Surgeon') {
+            newList = suQueue;
+            newList.push(currPatient)
+            setSu(newList)  
         }
         setShow('queue');
         setCurrent(null);
@@ -104,27 +120,24 @@ export default function Content() {
                     }}>Home</Button>}
                     {permission !== null && <Button color="inherit" onClick={() => {
                         setShow('queue');
-                        console.log(gpQueue);
-                        console.log(spQueue);
-                        console.log(suQueue);
                     }}>Queue</Button>}
                     {currPatient !== null && <Button color="inherit" onClick={() => {
                         setShow('profile');
                     }}>Profile</Button>}
                 </Toolbar>
             </AppBar>
-            <p>{memes}</p>
+            <div style={{padding: '1%'}}></div>
             {show === 'queue' && currPatient === null && queue.length > 0 && <NewButton name="Next Person" onClick={() => {
                 nextPatient(queue[0]);
             }}></NewButton>}
             {show === 'home' && <NewButton name="GP" onClick={() => {
-                changePermissions('gp');
+                changePermissions('GP');
             }}></NewButton>}
             {show === 'home' && <NewButton name="Specialist" onClick={() => {
-                changePermissions('specialist');
+                changePermissions('Specialist');
             }}></NewButton>}
             {show === 'home' && <NewButton name="Surgeon" onClick={() => {
-                changePermissions('surgeon');
+                changePermissions('Surgeon');
             }}></NewButton>}
             {show === 'queue' && <QueueList type={permission} patients={queue}></QueueList>}
             {show === 'profile' && currPatient !== null &&
@@ -137,14 +150,14 @@ export default function Content() {
             }}></NewButton>
             </Grid>}
             {show === 'profile' && <PatientInfo currentPatient={currPatient}></PatientInfo>}
-            {show === 'send' && permission !== 'gp' && <NewButton name="GP" onClick={() => {
-                movePatient('gp');
+            {show === 'send' && permission !== 'GP' && <NewButton name="GP" onClick={() => {
+                movePatient('GP');
             }}></NewButton>}
-            {show === 'send' && permission !== 'specialist' && <NewButton name="Specialist" onClick={() => {
-                movePatient('specialist');
+            {show === 'send' && permission !== 'Specialist' && <NewButton name="Specialist" onClick={() => {
+                movePatient('Specialist');
             }}></NewButton>}
-            {show === 'send' && permission !== 'surgeon' && <NewButton name="Surgeon" onClick={() => {
-                movePatient('surgeon');
+            {show === 'send' && permission !== 'Surgeon' && <NewButton name="Surgeon" onClick={() => {
+                movePatient('Surgeon');
             }}></NewButton>}
             {show === 'send' && <NewButton name="End" onClick={() => {
                 movePatient('end');

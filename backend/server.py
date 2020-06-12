@@ -8,21 +8,16 @@ from flask import Flask, request
 
 from werkzeug.exceptions import BadRequest
 
-from main import queue_create
+from main import queue
 
 from json import dumps
 
 APP = Flask(__name__)
 
-
-@APP.route('/q')
-def q():
-    return dumps({'hi': 'Jeremy'})
-
-'''@APP.route('/q', methods=['POST'])
+@APP.route('/q', methods=['POST'])
 def q():
     name = request.get_json()['name']
-    return dumps({'hi': name})'''
+    return dumps({'hi': name})
 
 @APP.route('/queue/create', methods=['POST'])
 def queue_create_route():
@@ -46,7 +41,7 @@ def queue_route():
     '''
     name = request.args.get('name')
     dct = queue(name)
-    return dumps({})
+    return dumps(dct)
 
 @APP.route('/patient/create', methods=['POST'])
 def patient_create():

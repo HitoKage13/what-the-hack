@@ -44,6 +44,7 @@ export default function PatientInfo(props) {
                     })}
                 </Card>}
                 <p style={statusColor}><b>Priority: {patient.priority}</b></p>
+                
                 </Card> }
         </Grid>
     )
