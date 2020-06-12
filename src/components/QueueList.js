@@ -1,6 +1,5 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
+import { Grid } from '@material-ui/core';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -24,36 +23,20 @@ import './QueueList.css'
     },
 })); */
 
-export default function QueueList() {
+export default function QueueList(props) {
     // const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
     const { width } = useWindowDimensions();
-
-    const patients = [
-        {
-            'name': 'Jeremy Lim', 'age': 20, 'telephone': '0478 893 328', 'emergency': '0482 162 538',
-            'medicare': '1872 2727 1762 7348', 'status': 'waiting', 'doctor': 'Doctor McDoctorface',
-            'diseases': ['Cancer', 'Diabetes', 'AIDS'], 'notes': 'N/A'
-        },
-        {
-            'name': 'Haesun Shim', 'age': 22, 'telephone': '0427 173 283', 'emergency': '0482 267 373',
-            'medicare': '2734 1883 4327 2983', 'status': 'waiting', 'doctor': 'Doctor McDoctorface',
-            'diseases': ['Back Pain', 'Leprosy', 'AIDS'], 'notes': 'N/A'
-        },
-        {
-            'name': 'Sandeep Das', 'age': 20, 'telephone': '0418 389 374', 'emergency': '0472 374 127',
-            'medicare': '1739 2784 5903 6830', 'status': 'specialist', 'doctor': 'Doctor McDoctorface',
-            'diseases': ['Ebola', 'COVID-19'], 'notes': 'N/A'
-        }
-    ]
 
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
     };
 
+    const patients = props.patients;
+
     return (
         <div className="container">
-            {patients.map((person, key) => {
+            {patients !== null && patients.map((person, key) => {
                 return(
                     <ExpansionPanel expanded={expanded === key} onChange={handleChange(key)}>
                         <ExpansionPanelSummary
@@ -75,6 +58,7 @@ export default function QueueList() {
                                     </div>
                                 )
                             })}
+                            
                         </div>
                     </ExpansionPanelDetails>
                 </ExpansionPanel>
