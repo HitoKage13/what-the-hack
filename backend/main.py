@@ -3,9 +3,10 @@ Description
 '''
 
 DATA = {'doctors': [], 'queues': []}
-
+PATIENT_ID = 0
 class Patient:
     def __init__(self, name, age, telephone, emergency, medicare, diseases):
+        self.id = PATIENT_ID
         self.name = name
         self.age = age
         self.telephone = telephone
@@ -13,34 +14,40 @@ class Patient:
         self.medicare = medicare
         self.diseases = diseases
 
-def queue_create(name):
-    '''
-    Description:
-    Params:
-    Raises:
-    '''
-    queue = {'name': name, 'patients': []}
-    DATA['queues'].append(queue)
-
-def queue(name):
-    for queue in DATA['queues']:
-        if queue['name'] == name:
-            return queue
+def queue(queue_name):
+    for q in DATA['queues']:
+        if q['queue_name'] == queue_name:
+            return q
     raise Exception("Can't find queue")
 
-def patient_create(name):
-    new_patient = Patient(name, age, )
-    for queue in DATA['queues']:
-        if queue['name'] == name:
-            return queue
-    raise Exception("Can't find queue")
-
-def patient_move():
-    pass
-
-def patient_
-def help(id, name_queue):
+def patient_create(name, age, telephone, emergency, medicare, diseases):
+    PATIENT_ID += 1
+    new_patient = Patient(name, age, telephone, emergency, medicare, diseases)
     
+
+def patient_move(id, prev_queue, to_here_queue):
+    for q in DATA['queues']:
+        if q == prev_queue:
+            for patient in q['patients']:
+                if patient[id] == id:
+                    tmp = patient
+    patient_delete(id, prev_queue)
+    for q in DATA['queues']:
+        if q == to_here_queue:
+                q['patients'].append(tmp)
+    
+def patient_delete(id, prev_queue):
+    for q in DATA['queues']:
+        if q == prev_queue:
+            for patient in q['patients']:
+                if patient[id] == id:
+                    q.remove(patient)
+
+def patient_info(id, info):
+    for q in DATA['queues']:
+        for patient in q['patients']:
+            if patient[id] == id:
+                patient.info = info  
 
 def patient_status(id, status):
     for q in DATA['queues']:
@@ -48,12 +55,6 @@ def patient_status(id, status):
             if p['id'] == id:
                 p['status'] = status
 
-# def doctor_create():
-#     new_do
-
-# def help():
-
-#     pass
 
 if __name__ == "__main__":
     print(DATA)
