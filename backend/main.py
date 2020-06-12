@@ -6,7 +6,7 @@ DATA = {
     'doctors': [
         {'name': 'Jimmothy', 'type': 'GP'},
         {'name': 'Tom', 'type': 'Specialist'},
-        {'name': 'Joanna', 'type': 'Surgeon'}}
+        {'name': 'Joanna', 'type': 'Surgeon'}
     ],
     'queues': [
         {'name': 'GP', 'patients':[]},
