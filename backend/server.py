@@ -1,7 +1,6 @@
 '''
 Description
 '''
-
 from flask import Flask, request
 
 # from werkzeug.exceptions import BadRequest
@@ -20,9 +19,9 @@ def queue_create_route():
     Raises: 
     Returns: {}
     '''
-    print(request.get_json()['name'])
-    # name = request.get_json()['name']
-    # queue_create(name)
+    name = request.get_json()["name"]
+    queue_create(name)
+    return dumps({})
 
 @APP.route('/queue', methods=['GET'])
 def queue_route():
@@ -32,7 +31,7 @@ def queue_route():
     Raises: 
     Returns: {}
     '''
-    name = request.get_json()['name']
+    name = request.args.get('name')
     return dumps(queue(name))
 
 # @APP.route('/patient/create', methods=['POST'])
