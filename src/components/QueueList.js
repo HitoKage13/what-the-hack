@@ -27,12 +27,12 @@ export default function QueueList(props) {
     // const classes = useStyles();
     const [expanded, setExpanded] = React.useState(false);
     const { width } = useWindowDimensions();
+    const patients = props.patients;
+    const permissions = props.permissions;
 
     const handleChange = (panel) => (event, isExpanded) => {
         setExpanded(isExpanded ? panel : false);
     };
-
-    const patients = props.patients;
 
     return (
         <div className="container">

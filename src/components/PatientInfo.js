@@ -6,15 +6,15 @@ import './PatientInfo.css'
 export default function PatientInfo(props) {
     const patient = props.currentPatient;
     var statusColor = {}
-    if (patient.erStatus === 'Resuscitation') {
+    if (patient.priority === 'Resuscitation') {
         statusColor = { color: '#630808' }
-    } else if(patient.erStatus === 'Emergency') {
+    } else if (patient.priority === 'Emergency') {
         statusColor = { color: '#e01616' }
-    } else if (patient.erStatus === 'Urgent') {
+    } else if (patient.priority === 'Urgent') {
         statusColor = { color: '#e3870e' }
-    } else if (patient.erStatus === 'Non-Urgent') {
+    } else if (patient.priority === 'Non-Urgent') {
         statusColor = { color: '#c9cf25' }
-    } else if (patient.erStatus === 'Referred') {
+    } else if (patient.priority === 'Referred') {
         statusColor = { color: '#1aed21' }
     }
     const [info, setInfo] = useState(false);
@@ -38,12 +38,12 @@ export default function PatientInfo(props) {
                     {Object.keys(patient).map((key) => {
                         return (
                             <div>
-                                {key !== 'erStatus' && <Typography className="patient-info"><b>{key}</b>: {patient[key]}</Typography>}
+                                {key !== 'priority' && <Typography className="patient-info"><b>{key}</b>: {patient[key]}</Typography>}
                             </div>
                         )
                     })}
                 </Card>}
-                <p style={statusColor}><b>Status: {patient.erStatus}</b></p>
+                <p style={statusColor}><b>Priority: {patient.priority}</b></p>
                 </Card> }
         </Grid>
     )

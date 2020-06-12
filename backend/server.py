@@ -2,6 +2,8 @@
 Description
 '''
 
+import time
+
 from flask import Flask, request
 
 from werkzeug.exceptions import BadRequest
@@ -12,10 +14,15 @@ from json import dumps
 
 APP = Flask(__name__)
 
-@APP.route('/q', methods=['POST'])
+
+@APP.route('/q')
+def q():
+    return dumps({'hi': 'Jeremy'})
+
+'''@APP.route('/q', methods=['POST'])
 def q():
     name = request.get_json()['name']
-    return dumps({'hi': name})
+    return dumps({'hi': name})'''
 
 @APP.route('/queue/create', methods=['POST'])
 def queue_create_route():
@@ -170,4 +177,4 @@ def status():
     return dumps({})
 
 if __name__ == "__main__":
-    APP.run(port = 5050, debug=True)
+    APP.run(port = 5000, debug=True)
