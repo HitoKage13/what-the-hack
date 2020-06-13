@@ -2,26 +2,16 @@
 Description
 '''
 from flask import Flask, request
-
-# from werkzeug.exceptions import BadRequest
-
-from main import queue_create, queue
-
+from werkzeug.exceptions import BadRequest
+from main import return_data, queue, patient_create, patient_delete, \
+    patient_info, patient_move, patient_status, get_patient_data
 from json import dumps
 
 APP = Flask(__name__)
 
-@APP.route('/queue/create', methods=['POST'])
-def queue_create_route():
-    '''
-    A route for
-    Params: {}
-    Raises: 
-    Returns: {}
-    '''
-    name = request.get_json()["name"]
-    queue_create(name)
-    return dumps({})
+@APP.route('/return/data', methods=['GET'])
+def return_data_route():
+    return dumps(return_data())
 
 @APP.route('/queue', methods=['GET'])
 def queue_route():
@@ -32,94 +22,86 @@ def queue_route():
     Returns: {}
     '''
     name = request.args.get('name')
-    return dumps(queue(name))
+    dct = queue(name)
+    return dumps(dct)
 
-# @APP.route('/patient/create', methods=['POST'])
-# def patient_create():
-#     '''
-#     A route for
-#     Params: {}
-#     Raises: 
-#     Returns: {}
-#     '''
-#     zid = request.get_json()['zid']
-#     description = request.get_json()['description']
-#     try:
-#         helpr.make_request(zid, description)
-#     except (KeyError,  ValueError):
-#         raise BadRequest('')
-#     return dumps({})
+@APP.route('/patient/create', methods=['POST'])
+def patient_create_route():
+    '''
+    A route for
+    Params: {}
+    Raises: 
+    Returns: {}
+    '''
+    priority = request.get_json()['priority']
+    name = request.get_json()['name']
+    age = request.get_json()['age']
+    telephone = request.get_json()['telephone']
+    emergency = request.get_json()['emergency']
+    medicare = request.get_json()['medicare']
+    diseases = request.get_json()['diseases']
+    patient_create(priority, name, age, telephone, emergency, medicare, diseases)
+    return dumps({})
 
-# @APP.route('/patient/move', methods=['POST'])
-# def patient_move():
-#     '''
-#     A route for
-#     Params: {}
-#     Raises: 
-#     Returns: {}
-#     '''
-#     zid = request.get_json()['zid']
-#     description = request.get_json()['description']
-#     try:
-#         helpr.make_request(zid, description)
-#     except (KeyError,  ValueError):
-#         raise BadRequest('')
-#     return dumps({})
+@APP.route('/patient/move', methods=['PUT'])
+def patient_move_route():
+    '''
+    A route for
+    Params: {}
+    Raises: 
+    Returns: {}
+    '''
+    id = request.get_json()['id']
+    prev_queue = request.get_json()['prev_queue']
+    to_here_queue = request.get_json()['to_here_queue']
+    patient_move(id, prev_queue, to_here_queue)
+    return dumps({})
 
-# @APP.route('/patient/delete', methods=['DELETE'])
-# def patient_delete():
+@APP.route('/patient/delete', methods=['DELETE'])
+def patient_delete_route():
+    '''
+    A route for
+    Params: {}
+    Raises: 
+    Returns: {}
+    '''
+    id = request.get_json()['id']
+    prev_queue = request.get_json()['prev_queue']
+    patient_delete(id, prev_queue)
+    return dumps({})
 
-#     id = request.get_json()['id']
-#     description = request.get_json()['description']
-#     try:
-#         main.make_request(id, description)
-#     except (KeyError,  ValueError):
-#         raise BadRequest('')
-#     return dumps({})
+@APP.route('/patient/info', methods=['POST'])
+def patient_info_route():
+    '''
+    A route for
+    Params: {}
+    Raises: 
+    Returns: {}
+    '''
+    id = request.get_json()['id']
+    info = request.get_json()['info']
+    patient_info(id, info)
+    return dumps({})
 
-# @APP.route('/patient/info', methods=['PUT'])
-# def patient_info():
+@APP.route('/patient/status', methods=['POST'])
+def patient_status_route():
+    '''
+    A route for
+    Params: {}
+    Raises: 
+    Returns: {}
+    '''
+    id = request.get_json()['id']
+    status = request.get_json()['status']
+    patient_status(id, status)
+    return dumps({})
 
-#     zid = request.get_json()['id']
-#     description = request.get_json()['description']
-#     try:
-#         main.make_request(zid, description)
-#     except (KeyError,  ValueError):
-#         raise BadRequest('')
-#     return dumps({})
+# @APP.route('/patient/getinfo', methods=['GET'])
+# def patient_get_info_route():
+#     id = request.args.get('id')
+#     patient = get_patient_data(id)
+#     return dumps(patient)
 
-# @APP.route('/patient/status', methods=['PUT'])
-# def patient_status():
-
-#     zid = request.get_json()['id']
-#     description = request.get_json()['description']
-#     try:
-#         main.make_request(zid, description)
-#     except (KeyError,  ValueError):
-#         raise BadRequest('')
-#     return dumps({})
-
-# @APP.route('/doctor/create', methods=['POST'])
-# def doctor_create():
-
-#     id = request.get_json()['id']
-#     description = request.get_json()['description']
-#     try:
-#         main.make_request(id, description)
-#     except (KeyError,  ValueError):
-#         raise BadRequest('')
-#     return dumps({})
-
-# @APP.route('/help', methods=['POST'])
-# def help():
-
-#     id = request.get_json()['id']
-#     description = request.get_json()['description']
-#     try:
-#         main.make_request(id, description)
-#     except (KeyError,  ValueError):
-#         raise BadRequest('')
-#     return dumps({})
 
 if __name__ == "__main__":
-    APP.run(port=5050, debug=True)
+    APP.run(port = 5000, debug=True)
