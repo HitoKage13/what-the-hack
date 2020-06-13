@@ -88,6 +88,7 @@ export default function Content() {
     // uses scanner to set patient info
     function getPatientInfo(qr) {
         setQr(qr);
+        alert("The patient: " + qr + " has been scanned and added into the system");
     }
 
     // progress patient to the next queue
@@ -105,7 +106,7 @@ export default function Content() {
         } else if (queue === 'Specialist') {
             newList = spQueue;
             newList.push(currPatient)
-            setSp(newList)  
+            setSp(newList)
         } else if (queue === 'Surgeon') {
             newList = suQueue;
             newList.push(currPatient)
@@ -148,12 +149,15 @@ export default function Content() {
             <p>{qr}</p>
             {show === 'home' && <NewButton name="GP" onClick={() => {
                 changePermissions('GP');
+                setQr(null);
             }}></NewButton>}
             {show === 'home' && <NewButton name="Specialist" onClick={() => {
                 changePermissions('Specialist');
+                setQr(null);
             }}></NewButton>}
             {show === 'home' && <NewButton name="Surgeon" onClick={() => {
                 changePermissions('Surgeon');
+                setQr(null);
             }}></NewButton>}
             {show === 'queue' && <QueueList type={permission} patients={queue}></QueueList>}
             {show === 'profile' && currPatient !== null &&
