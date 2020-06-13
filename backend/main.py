@@ -5,26 +5,48 @@ import random
 
 DATA = {
     'doctors': [
-        {'name': 'Jimmothy', 'type': 'GP'},
-        {'name': 'Tom', 'type': 'Specialist'},
-        {'name': 'Joanna', 'type': 'Surgeon'}
+        {'name': 'Jimmothy Lim', 'type': 'GP'},
+        {'name': 'Tom Smith', 'type': 'Specialist'},
+        {'name': 'Joanna Shim', 'type': 'Surgeon'}
     ],
     'queues': [
         {'name': 'GP', 'patients':[
             {
-                'id': 5,
+                'id': 1,
                 'priority': 'Urgent',
-                'name': 'Bob',
+                'name': 'Sandeep Das',
                 'age': 1,
-                'telephone': 98383,
-                'emergency': 373734,
-                'medicare': 3373,
+                'telephone': '0404983831',
+                'emergency': '0405985831',
+                'medicare': 337389012,
                 'diseases': 'Diabetes',
             },
             {
-                'id': 3,
+                'id': 5,
+                'priority': 'Urgent',
+                'name': 'Claudine Jung',
+                'age': 1,
+                'telephone': '0498383123',
+                'emergency': '0434373734',
+                'medicare': 423423373,
+                'diseases': 'Diabetes',
+            },
+        ]},
+        {'name': 'Specialist', 'patients':[
+            {
+                'id': 3 ,
                 'priority': 'Referred',
-                'name': 'Tony',
+                'name': 'Haesun Shim',
+                'age': 3,
+                'telephone': '0451567567',
+                'emergency': '0412367567',
+                'medicare': 454345654,
+                'diseases': 'Diabetes',
+            },
+            {
+                'id': 7,
+                'priority': 'Referred',
+                'name': 'Tony Smith',
                 'age': 3,
                 'telephone': 567567,
                 'emergency': 345345,
@@ -32,7 +54,6 @@ DATA = {
                 'diseases': 'Diabetes',
             }
         ]},
-        {'name': 'Specialist', 'patients':[]},
         {'name': 'Surgeon', 'patients':[]}
     ]
 }
